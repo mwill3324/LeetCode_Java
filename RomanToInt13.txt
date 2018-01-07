@@ -1,0 +1,47 @@
+public class Solution {
+    public int romanToInt(String s) {
+        int curval=0,last=0;
+        int value = 0;
+        for(int x = s.length()-1; x>=0; x--)
+        {
+            if(s.charAt(x)=='I')
+            {
+                curval = 1;
+            }
+            if(s.charAt(x)=='V')
+            {
+                curval = 5;
+            }
+            if(s.charAt(x)=='X')
+            {
+                curval = 10;
+            }
+            if(s.charAt(x)=='L')
+            {
+                curval = 50;
+            }
+            if(s.charAt(x)=='C')
+            {
+                curval = 100;
+            }
+            if(s.charAt(x)=='D')
+            {
+                curval = 500;
+            }
+            if(s.charAt(x)=='M')
+            {
+                curval = 1000;
+            }
+            if(curval >= last)
+            {
+               value += curval;
+               last = curval;
+            }
+            else
+            {
+               value -= curval; 
+            }
+        }
+        return value;
+    }
+}

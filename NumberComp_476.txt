@@ -1,0 +1,8 @@
+public class Solution {
+    public int findComplement(int num) {
+        int bin = (Integer.highestOneBit(num) << 1);//returns highest bin bit..
+        bin--;//minus one for comp
+        bin = bin - num;//subtract original value//
+        return bin;
+    }
+}

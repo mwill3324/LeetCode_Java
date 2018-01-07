@@ -1,0 +1,100 @@
+public class Solution {
+    public int myAtoi(String str) {
+        
+        long value = 0;
+        boolean neg=false;
+        boolean pos=false;
+
+        if (str.length()>0)
+        {
+		str = str.trim();
+            int i = 0;
+            boolean gotnum = false;
+            for(int x = 0; x<str.length() ; x++)
+                { 
+                if(value>2147483647){
+                    if(neg)
+                    {
+                        value = 0-value;
+                        if(value<-2147483648)
+                        {
+                            return -2147483648;
+                        }
+                        else
+                        {
+                            value = 0 - value;
+                        }
+                    }
+                    else
+                    {
+                        return 2147483647;
+                    }
+                }
+                if(value<-2147483648){
+                    if(neg)
+                    {
+                        value = 0-value;
+                    }
+                    return -2147483648;
+                }
+                if(str.charAt(x)>='a'&&str.charAt(x)<='z')
+                {
+                    if(neg)
+                    {
+                        value = 0 - value;
+                    }
+                    return (int)value;
+                }
+                if(str.charAt(x)== '-' )
+                {
+                    neg = true;
+                }
+                if(str.charAt(x)=='+')
+                {
+                    pos = true;
+                }
+                if(neg == true && pos == true)
+                {
+                    return 0;
+                }
+                if(!(str.charAt(x) >= 48 && str.charAt(x) <= 57) && gotnum)
+                {
+                    if(neg)
+                    {
+                        value = 0 - value;
+                    }
+                    return (int)value;
+                }
+                if((str.charAt(x) >= 48 && str.charAt(x) <= 57)||str.charAt(x)=='+'||str.charAt(x)=='-')
+                {
+                    gotnum =true;
+                }
+                if(str.charAt(x)==' '||str.charAt(x)==0 && value == 0||!(str.charAt(x) >= 48 && str.charAt(x) <= 57))
+                {
+                    continue;
+                }
+                if(value>0)
+                {
+                    value = value*10;
+                }
+                value += str.charAt(x) - 48;
+            }
+            if(neg)
+            {
+                value = 0-value;
+            }
+            if(value<-2147483648){
+                return -2147483648;
+            }
+            if(value>2147483647){
+                return 2147483647;
+            }
+            return (int)value;
+        }
+        else
+        {
+            return 0;
+        }
+        
+    }
+}

@@ -1,0 +1,38 @@
+public class Solution {
+    public int reverse(int x) {
+        int a = 0;
+        int rem;
+        int mod = x;
+        Boolean isneg = false;
+        if(mod<0)
+        {
+            isneg = true;
+        }
+        mod = Math.abs(mod);
+        while(true)
+        {
+            double rets;
+            rem = mod%10;//if 123, returns 3
+            rets = mod/10;// mod = 123/10 = 12;
+            mod = (int)Math.floor(rets);//takes floor of 12.3
+            
+            a += rem;// add 3 to number
+            if(mod < 10)//12 is numbers so continue
+            {
+                if(mod != 0)
+                {
+                    a=a*10;
+                }
+                a += mod;
+                break;
+            }
+            a = a*10;//3 = 30, so when loops 12 % 10 = 2, a += 2 = 32.
+        }
+        if(isneg)
+        {
+            a = 0-a;
+        }
+        return a;
+        
+    }
+}

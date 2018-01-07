@@ -1,0 +1,26 @@
+public class Solution {
+    public String reverseWords(String s) {
+        String newString = "";
+        int i = 0;
+        while(s.indexOf(' ') != -1)
+        {
+            i++;
+            String word = s.substring(0,s.indexOf(' '));
+            String wordrev = "";
+            for(int j = word.length()-1; j>=0; j--)
+            {
+                wordrev += word.charAt(j);
+            }
+            newString += (wordrev+' ');
+            String temp = s.substring(s.indexOf(' ')+1,s.length());
+            s = temp;
+        }
+        String lastword = "";
+        for(int j = s.length()-1; j>=0; j--)
+        {
+            lastword += s.charAt(j);
+        }
+        newString += lastword;
+        return newString;
+    }
+}
