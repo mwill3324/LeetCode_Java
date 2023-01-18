@@ -1,0 +1,70 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        // Find shorter loop in form [shortArray, LongArray]
+        // SFarray is just shortest First array.
+        if(nums1.length == 1 && nums2.length == 1){
+            return (Double.valueOf(nums1[0] + nums2[0])/2);
+        }
+        int[][] SFarray = nums1.length < nums2.length ? new int[][] {nums1,nums2} : new int[][]{nums2,nums1};   
+        // Result Array
+        List<Integer> combinedArrays = new ArrayList<Integer>(); 
+        
+       // 
+        int sLength = SFarray[0].length;
+        int lLength = SFarray[1].length;
+        while(sLength>0 && lLength>0){
+            //check for greatest value
+            //array will end up highest to lowest
+            if(SFarray[0][sLength-1] >= SFarray[1][lLength-1]){ 
+                //shorter array has highest value
+                combinedArrays.add(SFarray[0][sLength-1]); //add last item, while removing from source array
+                sLength--;
+            }
+            else{
+                //longer array has higher val
+                combinedArrays.add(SFarray[1][lLength-1]); //add last item, while removing from source array
+                lLength--;
+            }
+        }
+        // shorter array has no remaining values, so add the rest from the longer array..
+        if(lLength>0){
+            System.out.println("llength");
+            while(lLength>0){
+                combinedArrays.add(SFarray[1][lLength-1]);
+                lLength--;
+            }
+        }
+        else{
+            System.out.println("slength");
+            while(sLength>0){
+                combinedArrays.add(SFarray[0][sLength-1]);
+                sLength--;
+            }
+        }
+        
+        //int half = combinedArrays.size()/2;
+        //int cSize = combinedArrays.size();
+        return combinedArrays.size()%2==1 ? 
+        combinedArrays.get((int)java.lang.Math.ceil(combinedArrays.size()/2)) : 
+        ((Double.valueOf(combinedArrays.get(combinedArrays.size()/2-1)) + Double.valueOf(combinedArrays.get(combinedArrays.size()/2)))/2);
+        // size mod 2 give odd/even
+        /*
+        if(combinedArrays.size() % 2 == 1){
+            // round up for odd numbers eg [1,2,3] -> length/2 = 1.5 -> 
+            // return index at cieling(1.5) = returns index at 2 
+            double median = combinedArrays.get((int)java.lang.Math.ceil(half));
+            return median;
+        }
+        else{
+            // return middle 2 integers summed and halved
+            int x = combinedArrays.get(half-1);
+            int y = combinedArrays.get(half);
+            double median =((new Double(x)+new Double(y))/2);
+            return median;
+        }
+        */
+        //for(int i = 0; i<shortest.length; i++){
+        //    if(shortest[i]<)
+        //}
+    }
+}
